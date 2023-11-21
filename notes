@@ -1,0 +1,49 @@
+php artisan optimize not worked for this project
+
+1.create a file Admin.php inside middleware folder  
+         if(!Auth::guard('admin')->check()){
+            return redirect('/admin/login');
+        }
+
+2. next modify kernel 
+3. modify auth.php then redirect dashboard
+
+4.in the help of admintableseeder  insert data into admins table
+
+
+5.in updatepaswword.blade.php use ajax through integrate 
+    ->in layout.bladde.php add <meta name="csrf-token" content="{{csrf_token()}}" />
+    ->custom.js add csrf_token i,e   
+
+        <script type="text/javascript">
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    </script>
+6.image upload or update using interventation
+    -> package  ==>composer require intervention/image
+    
+
+
+7.rememebr me functionality add in login page when click on these checkbox emailid and password store in cookies
+
+8.composer require laravel/socialite
+After creating id and secret id 
+        .env ->
+        # GOOLE_CLINT_ID=625165275382-9a6aj7gh4t786v5a57tc2ce1dp13tskb.apps.googleusercontent.com
+        # GOOLE_SECRET_ID=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
+
+        # GOOGLE_REDIRECT=http://127.0.0.1:8000/admin/dashboard
+
+    service.php->
+    'google' => [
+        'client_id' => env('GOOLE_CLINT_ID'),
+        'client_secret' => env('GOOLE_SECRET_ID'),
+        'redirect' => env('GOOGLE_REDIRECT'),
+    ],
+
+9. #42 shown category delete not worked
+// inside config database.php we chang mysql -> strict=false before set strict=true
+10 change  brand_id,discount_type,final_price,product_video all are we defined as default is 0 and keywords  default is active in products table
